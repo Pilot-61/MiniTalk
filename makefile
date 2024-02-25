@@ -6,7 +6,7 @@
 #    By: mes-salh <mes-salh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 23:05:57 by mes-salh          #+#    #+#              #
-#    Updated: 2024/02/14 20:40:09 by mes-salh         ###   ########.fr        #
+#    Updated: 2024/02/25 01:03:27 by mes-salh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,12 @@ OBJ_SERVER = $(SRC_SERVER:.c=.o)
 OBJ_CLIENT_BONUS = $(SRC_CLIENT_BONUS:.c=.o)
 OBJ_SERVER_BONUS = $(SRC_SERVER_BONUS:.c=.o)
 
-
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): client server client_bonus server_bonus
+$(NAME): client server
 
 bonus: client_bonus server_bonus
 
@@ -39,12 +38,12 @@ server: $(OBJ_SERVER)
 	$(CC) $(CFLAGS) -o server $(OBJ_SERVER)
 
 client_bonus: $(OBJ_CLIENT_BONUS)
-	$(CC) $(CFLAGS)  $(OBJ_CLIENT_BONUS) -o client_bonus 
+	$(CC) $(CFLAGS) -o client_bonus $(OBJ_CLIENT_BONUS)
 
 server_bonus: $(OBJ_SERVER_BONUS)
-	$(CC) $(CFLAGS) $(OBJ_SERVER_BONUS) -o server_bonus 
+	$(CC) $(CFLAGS) -o server_bonus $(OBJ_SERVER_BONUS)
 
-%.o: %.c
+%.o: %.c minitalk.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
@@ -54,5 +53,3 @@ fclean: clean
 	rm -f client server client_bonus server_bonus
 
 re: fclean all
-
-.PHONY: all clean fclean re bonus client server client_bonus server_bonus
