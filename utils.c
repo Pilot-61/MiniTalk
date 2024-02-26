@@ -6,11 +6,16 @@
 /*   By: mes-salh <mes-salh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:06:09 by mes-salh          #+#    #+#             */
-/*   Updated: 2024/02/25 00:44:38 by mes-salh         ###   ########.fr       */
+/*   Updated: 2024/02/26 06:36:31 by mes-salh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+void	ft_putchar(char c)
+{
+	write (1, &c, 1);
+}
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -37,11 +42,6 @@ void	ft_putnbr(int n)
 	}
 	else
 		ft_putchar((i + '0'));
-}
-
-void	ft_putchar(char c)
-{
-	write (1, &c, 1);
 }
 
 int	ft_atoi(const char *str)

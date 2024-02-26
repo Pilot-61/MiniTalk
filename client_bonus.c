@@ -6,12 +6,11 @@
 /*   By: mes-salh <mes-salh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:28:31 by mes-salh          #+#    #+#             */
-/*   Updated: 2024/02/26 05:35:22 by mes-salh         ###   ########.fr       */
+/*   Updated: 2024/02/26 06:38:18 by mes-salh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdio.h>
 
 void	sigal_handler(int signal)
 {
@@ -21,41 +20,6 @@ void	sigal_handler(int signal)
 		exit(0);
 	}
 }
-
-// void	send_bit(int pid, char bit)
-// {
-// 	int	sig;
-
-// 	if (pid > 0)
-// 	{
-// 		if (bit == '0')
-// 			sig = SIGUSR1;
-// 		else
-// 			sig = SIGUSR2;
-// 		kill (pid, sig);
-// 		usleep(400);
-// 	}
-// 	else
-// 		return ;
-// }
-
-// void	send_char(int pid, char c)
-// {
-// 	int		i;
-// 	char	bit;
-
-// 	i = 7;
-// 	while (i >= 0)
-// 	{
-// 		if ((c >> i) & 1)
-// 			bit = '1';
-// 		else
-// 			bit = '0';
-// 		send_bit (pid, bit);
-// 		i--;
-// 	}
-// 	usleep(400);
-// }
 
 void	send_data(int pid, char data)
 {

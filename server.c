@@ -6,14 +6,11 @@
 /*   By: mes-salh <mes-salh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:06:06 by mes-salh          #+#    #+#             */
-/*   Updated: 2024/02/26 06:05:57 by mes-salh         ###   ########.fr       */
+/*   Updated: 2024/02/26 06:38:31 by mes-salh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <stdio.h>
-#include <signal.h>
-#include <time.h>
 
 static void	ft_header(void)
 {
@@ -30,16 +27,6 @@ static void	ft_header(void)
 	ft_putstr_fd("░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n", 1);
 	ft_putstr_fd("\033[0m", 1);
 }
-
-// void	checker(int *i, char *c, int *client_pid, int pid)
-// {
-// 	if (pid != *client_pid)
-// 	{
-// 		*client_pid = pid;
-// 		*i = 7;
-// 		*c = 0;
-// 	}
-// }
 
 void	mes_handlesig(int sig, siginfo_t *info, void *just)
 {
