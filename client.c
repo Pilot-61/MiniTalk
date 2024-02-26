@@ -6,7 +6,7 @@
 /*   By: mes-salh <mes-salh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:05:43 by mes-salh          #+#    #+#             */
-/*   Updated: 2024/02/25 02:13:29 by mes-salh         ###   ########.fr       */
+/*   Updated: 2024/02/26 06:11:42 by mes-salh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,39 @@
 // 		return ;
 // }
 
-void	send_char(int pid, char c)
+// void	send_char(int pid, char c)
+// {
+// 	int		i;
+// 	char	bit;
+
+// 	i = 7;
+// 	while (i >= 0)
+// 	{
+// 		if ((c >> i) & 1)
+// 			bit = '1';
+// 		else
+// 			bit = '0';
+// 		send_bit(pid, bit);
+// 		i--;
+// 	}
+// 	usleep(200);
+// }
+
+void	send_data(int pid, char data)
 {
-	int		i;
-	char	bit;
-	int		sig;
+	int	i;
+	int	sig;
 
 	i = 7;
 	while (i >= 0)
 	{
-		if ((c >> i) & 1)
-			bit = '1';
-		else
-			bit = '0';
-		if (pid > 0)
-		{
-			if (bit == '0')
-				sig = SIGUSR1;
-			else
-				sig = SIGUSR2;
-			kill (pid, sig);
-			usleep(100);
-		}
-		else
-			return ;
+		sig = SIGUSR1;
+		if ((data >> i) & 1)
+			sig = SIGUSR2;
+		kill(pid, sig);
+		usleep(300);
 		i--;
 	}
-	usleep(100);
 }
 
 int	main(int argc, char **argv)
@@ -77,9 +83,9 @@ int	main(int argc, char **argv)
 	pid = atoi(argv[1]);
 	while (message[i])
 	{
-		send_char(pid, message[i]);
+		send_data(pid, message[i]);
 		i++;
 	}
-	send_char(pid, '\0');
+	send_data(pid, '\0');
 	return (0);
 }

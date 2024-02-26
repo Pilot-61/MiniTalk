@@ -6,13 +6,14 @@
 /*   By: mes-salh <mes-salh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:06:06 by mes-salh          #+#    #+#             */
-/*   Updated: 2024/02/13 16:32:32 by mes-salh         ###   ########.fr       */
+/*   Updated: 2024/02/26 06:05:57 by mes-salh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 #include <stdio.h>
 #include <signal.h>
+#include <time.h>
 
 static void	ft_header(void)
 {
@@ -30,37 +31,41 @@ static void	ft_header(void)
 	ft_putstr_fd("\033[0m", 1);
 }
 
-void	checker(int *i, char *c, int *client_pid, int pid)
-{
-	if (pid != *client_pid)
-	{
-		*client_pid = pid;
-		*i = 7;
-		*c = 0;
-	}
-}
+// void	checker(int *i, char *c, int *client_pid, int pid)
+// {
+// 	if (pid != *client_pid)
+// 	{
+// 		*client_pid = pid;
+// 		*i = 7;
+// 		*c = 0;
+// 	}
+// }
 
 void	mes_handlesig(int sig, siginfo_t *info, void *just)
 {
-	static int	i = 7;
-	static char	c = 0;
-	static int	client_pid = 0;
-	int			pid;
+	static int		bit;
+	static char		c;
+	static pid_t	pid;
 
-	just = NULL;
-	pid = info->si_pid;
-	if (client_pid == 0)
-		client_pid = pid;
-	checker(&i, &c, &client_pid, pid);
-	if (sig == SIGUSR2)
-		c |= (1 << i);
-	i--;
-	if (i < 0)
+	(void)just;
+	if (pid != info->si_pid)
 	{
-		write(1, &c, 1);
-		i = 7;
+		bit = 0;
 		c = 0;
 	}
+	c = c << 1 | (sig - SIGUSR1);
+	bit++;
+	if (bit == 8)
+	{
+		if (c == 0)
+			write(1, "\n", 1);
+		else
+			write(1, &c, 1);
+		bit = 0;
+		c = 0;
+	}
+	pid = info->si_pid;
+	(void)info;
 }
 
 int	main(void)
