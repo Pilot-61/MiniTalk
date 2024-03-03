@@ -6,7 +6,7 @@
 /*   By: mes-salh <mes-salh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:05:43 by mes-salh          #+#    #+#             */
-/*   Updated: 2024/02/26 06:11:42 by mes-salh         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:39:05 by mes-salh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	send_data(int pid, char data)
 		if ((data >> i) & 1)
 			sig = SIGUSR2;
 		kill(pid, sig);
-		usleep(300);
+		usleep(500);
 		i--;
 	}
 }

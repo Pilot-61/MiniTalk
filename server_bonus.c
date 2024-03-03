@@ -6,7 +6,7 @@
 /*   By: mes-salh <mes-salh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:29:24 by mes-salh          #+#    #+#             */
-/*   Updated: 2024/02/26 06:35:11 by mes-salh         ###   ########.fr       */
+/*   Updated: 2024/03/03 18:03:49 by mes-salh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	mes_handlesig(int sig, siginfo_t *info, void *just)
 {
 	static int		bit;
 	static char		c;
-	static pid_t	pid;
+	static int		pid;
 
 	(void)just;
 	if (pid != info->si_pid)
@@ -58,7 +58,6 @@ void	mes_handlesig(int sig, siginfo_t *info, void *just)
 		c = 0;
 	}
 	pid = info->si_pid;
-	(void)info;
 }
 
 int	main(void)

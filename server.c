@@ -6,7 +6,7 @@
 /*   By: mes-salh <mes-salh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 23:06:06 by mes-salh          #+#    #+#             */
-/*   Updated: 2024/02/26 06:38:31 by mes-salh         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:50:46 by mes-salh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ static void	ft_header(void)
 
 void	mes_handlesig(int sig, siginfo_t *info, void *just)
 {
-	static int		bit;
-	static char		c;
-	static pid_t	pid;
+	static int		bit = 0;
+	static char		c = 0;
+	static int		pid;
 
 	(void)just;
+	pid = info->si_pid;
 	if (pid != info->si_pid)
 	{
 		bit = 0;
@@ -51,8 +52,6 @@ void	mes_handlesig(int sig, siginfo_t *info, void *just)
 		bit = 0;
 		c = 0;
 	}
-	pid = info->si_pid;
-	(void)info;
 }
 
 int	main(void)
@@ -63,7 +62,7 @@ int	main(void)
 	sa.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &sa, 0) == -1 || sigaction(SIGUSR2, &sa, 0) == -1)
 	{
-		ft_putstr_fd("Error\n", 1);
+		ft_putstr_fd("Error\n", 2);
 		exit(1);
 	}
 	ft_header();
